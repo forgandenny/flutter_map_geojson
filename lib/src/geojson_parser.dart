@@ -223,12 +223,21 @@ class GeoJsonParser {
           break;
         case 'Circle':
           {
-            circles.add(
-              circleMarkerCreationCallback!(
-                  LatLng(f['geometry']['coordinates'][1] as double,
-                      f['geometry']['coordinates'][0] as double),
-                  f['properties'] as Map<String, dynamic>),
-            );
+            if (f['properties']['radius'] == null) {
+              markers.add(
+                markerCreationCallback!(
+                    LatLng(f['geometry']['coordinates'][1] as double,
+                        f['geometry']['coordinates'][0] as double),
+                    f['properties'] as Map<String, dynamic>),
+              );
+            } else {
+              circles.add(
+                circleMarkerCreationCallback!(
+                    LatLng(f['geometry']['coordinates'][1] as double,
+                        f['geometry']['coordinates'][0] as double),
+                    f['properties'] as Map<String, dynamic>),
+              );
+            }
           }
           break;
         case 'MultiPoint':
