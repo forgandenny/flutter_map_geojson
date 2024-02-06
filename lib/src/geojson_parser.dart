@@ -375,7 +375,7 @@ class GeoJsonParser {
   //   );
   // }
 
-  /// default callback function for creating [Polygon]
+  /// default callback function for creating [CircleMarker]
   CircleMarker createDefaultCircleMarker(
       LatLng point, Map<String, dynamic> properties) {
     return CircleMarker(
