@@ -203,6 +203,12 @@ class GeoJsonParser {
     defaultCircleMarkerBorderColor ??= Colors.black.withOpacity(0.8);
     defaultCircleMarkerIsFilled ??= true;
 
+    // Clear existing features
+    markers.clear();
+    polylines.clear();
+    polygons.clear();
+    circles.clear();
+
     // loop through the GeoJson Map and parse it
     for (Map f in g['features'] as List) {
       String geometryType = f['geometry']['type'].toString();
