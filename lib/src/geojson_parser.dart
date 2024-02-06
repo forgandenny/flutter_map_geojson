@@ -212,17 +212,7 @@ class GeoJsonParser {
       }
       switch (geometryType) {
         case 'Point':
-          {
-            markers.add(
-              markerCreationCallback!(
-                  LatLng(f['geometry']['coordinates'][1] as double,
-                      f['geometry']['coordinates'][0] as double),
-                  f['properties'] as Map<String, dynamic>),
-            );
-          }
-          break;
-        case 'Circle':
-          {
+         {
             if (f['properties']['radius'] == null) {
               markers.add(
                 markerCreationCallback!(
@@ -239,6 +229,14 @@ class GeoJsonParser {
               );
             }
           }
+          break;
+        case 'Circle':
+           circles.add(
+                circleMarkerCreationCallback!(
+                    LatLng(f['geometry']['coordinates'][1] as double,
+                        f['geometry']['coordinates'][0] as double),
+                    f['properties'] as Map<String, dynamic>),
+              );
           break;
         case 'MultiPoint':
           {
