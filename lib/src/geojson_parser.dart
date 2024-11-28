@@ -218,38 +218,38 @@ class GeoJsonParser {
       }
       switch (geometryType) {
         case 'Point':
-         {
+          {
             if (f['properties']['radius'] == null) {
               markers.add(
                 markerCreationCallback!(
-                    LatLng(f['geometry']['coordinates'][1] as double,
-                        f['geometry']['coordinates'][0] as double),
+                    LatLng(f['geometry']['coordinates'][1].toDouble(),
+                        f['geometry']['coordinates'][0].toDouble()),
                     f['properties'] as Map<String, dynamic>),
               );
             } else {
               circles.add(
                 circleMarkerCreationCallback!(
-                    LatLng(f['geometry']['coordinates'][1] as double,
-                        f['geometry']['coordinates'][0] as double),
+                    LatLng(f['geometry']['coordinates'][1].toDouble(),
+                        f['geometry']['coordinates'][0].toDouble()),
                     f['properties'] as Map<String, dynamic>),
               );
             }
           }
           break;
         case 'Circle':
-           circles.add(
-                circleMarkerCreationCallback!(
-                    LatLng(f['geometry']['coordinates'][1] as double,
-                        f['geometry']['coordinates'][0] as double),
-                    f['properties'] as Map<String, dynamic>),
-              );
+          circles.add(
+            circleMarkerCreationCallback!(
+                LatLng(f['geometry']['coordinates'][1].toDouble(),
+                    f['geometry']['coordinates'][0].toDouble()),
+                f['properties'] as Map<String, dynamic>),
+          );
           break;
         case 'MultiPoint':
           {
             for (final point in f['geometry']['coordinates'] as List) {
               markers.add(
                 markerCreationCallback!(
-                    LatLng(point[1] as double, point[0] as double),
+                    LatLng(point[1].toDouble(), point[0].toDouble()),
                     f['properties'] as Map<String, dynamic>),
               );
             }
@@ -259,7 +259,8 @@ class GeoJsonParser {
           {
             final List<LatLng> lineString = [];
             for (final coords in f['geometry']['coordinates'] as List) {
-              lineString.add(LatLng(coords[1] as double, coords[0] as double));
+              lineString
+                  .add(LatLng(coords[1].toDouble(), coords[0].toDouble()));
             }
             polylines.add(polyLineCreationCallback!(
                 lineString, f['properties'] as Map<String, dynamic>));
@@ -271,7 +272,7 @@ class GeoJsonParser {
               final List<LatLng> lineString = [];
               for (final coords in line as List) {
                 lineString
-                    .add(LatLng(coords[1] as double, coords[0] as double));
+                    .add(LatLng(coords[1].toDouble(), coords[0].toDouble()));
               }
               polylines.add(polyLineCreationCallback!(
                   lineString, f['properties'] as Map<String, dynamic>));
@@ -289,10 +290,10 @@ class GeoJsonParser {
                 if (pathIndex == 0) {
                   // add to polygon's outer ring
                   outerRing
-                      .add(LatLng(coords[1] as double, coords[0] as double));
+                      .add(LatLng(coords[1].toDouble(), coords[0].toDouble()));
                 } else {
                   // add it to current hole
-                  hole.add(LatLng(coords[1] as double, coords[0] as double));
+                  hole.add(LatLng(coords[1].toDouble(), coords[0].toDouble()));
                 }
               }
               if (pathIndex > 0) {
@@ -316,11 +317,12 @@ class GeoJsonParser {
                 for (final coords in path as List<dynamic>) {
                   if (pathIndex == 0) {
                     // add to polygon's outer ring
-                    outerRing
-                        .add(LatLng(coords[1] as double, coords[0] as double));
+                    outerRing.add(
+                        LatLng(coords[1].toDouble(), coords[0].toDouble()));
                   } else {
                     // add it to a hole
-                    hole.add(LatLng(coords[1] as double, coords[0] as double));
+                    hole.add(
+                        LatLng(coords[1].toDouble(), coords[0].toDouble()));
                   }
                 }
                 if (pathIndex > 0) {
