@@ -6,7 +6,7 @@ import 'package:latlong2/latlong.dart';
 
 typedef MarkerCreationCallback = Marker Function(
     LatLng point, Map<String, dynamic> properties);
-typedef CircleMarkerCreationCallback = CircleMarker Function(
+typedef CircleMarkerCreationCallback<T extends Object> = T Function(
     LatLng point, Map<String, dynamic> properties);
 typedef PolylineCreationCallback = Polyline Function(
     List<LatLng> points, Map<String, dynamic> properties);
@@ -43,7 +43,7 @@ class GeoJsonParser {
   final List<Polygon> polygons = [];
 
   /// list of [CircleMarker] objects created as result of parsing
-  final List<CircleMarker> circles = [];
+  final List<Object> circles = [];
 
   /// user defined callback function that creates a [Marker] object
   MarkerCreationCallback? markerCreationCallback;
